@@ -1,0 +1,21 @@
+<!doctype html>
+<title>Price Sheet File Selection</title>
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<form action="" method=post enctype=multipart/form-data>
+    <dl>
+		<p>
+			<p><input type=file name=file><input type=submit value='Load Data' required>
+		</p>
+    </dl>
+</form>
