@@ -12,10 +12,24 @@
 	  {% endif %}
 	{% endwith %}
 </p>
-<form action="" method=post enctype=multipart/form-data>
+<form method="post" action="uploadfile" id="Load Value" enctype="multipart/form-data">
     <dl>
 		<p>
-			<p><input type=file name=file><input type=submit value='Load Data' required>
+			<p><input type="file" name="filename"><input type="submit" name="submit" value="Load Data">
 		</p>
     </dl>
+</form>
+<form method="post" action="" id="Product" enctype="multipart/form-data">
+	<dl>
+		<p>
+  {% if categories %}
+			<a>Select A Product</a>
+    		<select name="category" id="category" onchange="form.submit()">
+  {% for item in categories %}
+			<option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+			</select>
+  {% endif %}
+		</p>
+	</dl>
 </form>

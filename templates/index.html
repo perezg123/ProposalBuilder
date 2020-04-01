@@ -13,14 +13,13 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 
-<body>
-  <form action="#" method="POST" enctype=multipart/form-data>
+<div>
+<form action="#" method="POST" enctype="multipart/form-data">
 
-<!-- Begin Navigation Bar -->
+<!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
       <a class="navbar-brand" href="#">List Pricing Proposal Tool</a>
@@ -41,43 +40,77 @@
       </div>
     </div>
   </nav>
-<!-- End Navigation Bar -->
+</form>
+<!-- Navigation Bar -->
+<!-- Input File Container -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
 
-<!-- Begin Input File Container -->
-  <div class="row">
-
-    <div class="col">
-      <a>Select Input File</a>
-      <p><input type="file" name="file" onChange="form.submit()"><input type="submit" value="Load Data" required>
+      </div>
     </div>
-<!-- End Input File Container -->
-  {% if categories %}
-<!-- Begin Product Container -->
-        <div class="col">
-          <a>Select A Product</a>
-          <select name="category" id="category" onchange="this.form.submit()">
-            {% for item in categories %}
-              <option value="{{ item }}">{{ item }}</option>
-            {% endfor %}
-          </select>
-        </div>
-<!-- End Product Container -->
-  {% endif %}
-
-  {% if product %}
-
-  {% endif %}
-    <div class="col">
-      <div class="form-group" method="post" action="#" enctype="multipart/form-data">
-        <div><input class="btn btn-primary" type="submit" value="Submit"></div>
+    <div class="row">
+      <div method="post" action="" enctype="multipart/form-data">
+        <label for="inputFile">Select the input file</label>
+        <input type="file" class="form-control-file" id="inputFile" onchange="this.form.submit()">
       </div>
     </div>
   </div>
+<!-- Input File Container -->
+  {% if categories %}
+<!-- Product Container -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <form name="product_form" action="product" id="product_form" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="inputFile" value="{{ filename }}">
+          <input type="hidden" name="product" value="">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    data-toggle="dropdown">Select A Product<span class="caret"></span></button>
+            <ul class="dropdown-menu myclass products" name="products">
+            {% for item in categories %}
+              <li value="{{ item }}">{{ item }}</li>
+            {% endfor %}
+            </ul>
+          </div>
+        <div><input type="submit" name="product_button" value="Submit"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+<!-- End Product Container -->
+<!-- Start Unit Container -->
+  {% if productdata %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <form name="unit_form" action="unit" id="unit_form" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="inputFile" value="{{ filename }}">
+          <input type="hidden" name="product" value="categories">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button"
+                    data-toggle="dropdown">Select A Unit<span class="caret"></span></button>
+            <ul class="dropdown-menu myclass products" name="units">
+            {% for item in productdata %}
+              <li value="{{ item }}">{{ item }}</li>
+            {% endfor %}
+            </ul>
+          </div>
+        <div><input type="submit" name="unit_button" value="Submit"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+<!-- End Unit Container -->
 <!-- Bootstrap core JavaScript -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</form>
+<script src="/static/js/my.js"></script>
+
 </body>
 
 </html>
